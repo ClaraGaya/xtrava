@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-const { REACT_APP_CLIENT_ID, REACT_APP_SCOPE, REACT_APP_REDIRECT } = process.env;
+import { StravaAuthService } from '../api/strava.auth.service';
 
 
-function StravaAuth() {
-  const [state, setState] = useState();
+const StravaAuth = () => {
+  const [err, setErr] = useState(false);
 
-  const stravaAuth = async () => {
-    window.location.href = `http://www.strava.com/oauth/authorize?client_id=${REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${REACT_APP_REDIRECT}&approval_prompt=force&scope=${REACT_APP_SCOPE}`;
-  }
+  const auth = async () => {
+    try {
+      await StravaAuthService.stravaAuth();
+      setErr(false);
+    } catch (err) {
+      setErr(true);
+    }
+  };
 
   useEffect(() => {
-    stravaAuth();
+    auth();
   }, []);
 
   return (

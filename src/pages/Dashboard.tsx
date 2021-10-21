@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-function Dashboard() {
+const Dashboard = () => {
   const [state, setState] = useState();
 
   useEffect(() => {

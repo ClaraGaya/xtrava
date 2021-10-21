@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
-const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env;
+import { useHistory } from 'react-router-dom';
+import { StravaAuthService } from '../api/strava.auth.service';
 
-
-function StravaExchangeToken() {
-  const [state, setState] = useState();
+const StravaExchangeToken = () => {
+  const history = useHistory();
+  const [auth, setAuth] = useState(false);
 
   const stravaExchangeToken = async () => {
     let queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    let urlParams = new URLSearchParams(queryString);
     let authorization_code = urlParams.get('code');
-    let refreshTokenUrl = `https://www.strava.com/oauth/token?client_id=${REACT_APP_CLIENT_ID}&client_secret=${REACT_APP_CLIENT_SECRET}&code=${authorization_code}&grant_type=authorization_code`;
-    fetch(refreshTokenUrl, {
-      method: 'POST'
-    })
-    .then(res => res.json())
+
+    try {
+      await StravaAuthService.getToken(authorization_code).then(async (res) => {
+        setAuth(true);
+        console.log(res)
+        history.push('/dashboard');
+      });
+    } catch (err) {
+      setAuth(false);
+    }
   }
 
   useEffect(() => {
     stravaExchangeToken();
-  }, []);
+  });
 
   return (
     <></>
