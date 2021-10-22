@@ -1,0 +1,70 @@
+// Override default variables before the import
+$body-bg: #000;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 2vmin;
+  font-weight: normal;
+  // background: #bbc2e2e0;
+  background: #f3f4f5e0;
+  padding: .5em .025em;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.logo {
+  span::before,
+  span::after {
+    display: inline-block;
+    content: attr(data-letter);
+    color: #5a0303;
+    transition: 375ms ease-in-out;
+    transition-property: opacity, transform;
+  }
+  span::before {
+    // text-transform: uppercase;
+    color: #056047;
+    transform: translateX(45%);
+    opacity: 0.6;
+  }
+  span::after {
+    transform: translateX(-45%);
+    opacity: 0.4;
+  }
+  span {
+    margin: 0em 0.025em;
+    line-height: 1;
+    height: 1em;
+    font-size: 10vmin;
+    font-weight: 800;
+  }
+  span:hover::before,
+  span:hover::after {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+

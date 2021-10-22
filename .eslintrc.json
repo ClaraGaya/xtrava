@@ -1,0 +1,65 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/prop-types": "off", // Disable prop-types as we use TypeScript for type checking
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "linebreak-style": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-console": "off",
+    "no-nested-ternary": "off",
+    "no-unused-vars": [1, { "vars": "all", "args": "all" }],
+    "no-param-reassign": [
+      1,
+      { "props": true, "ignorePropertyModificationsFor": ["registration"] }
+    ],
+    "no-unused-expressions": [
+      1,
+      { "allowShortCircuit": true, "allowTernary": true }
+    ],
+    "comma-dangle": "off",
+    "no-useless-concat": 0,
+    "object-curly-newline": "off",
+    "arrow-body-style": [1, "as-needed"],
+    "arrow-parens": ["error", "as-needed"],
+    "max-len": [2, 150, 2, { "ignoreUrls": true, "ignoreComments": true}],
+    "operator-linebreak": ["error", "after"],
+    "implicit-arrow-linebreak": "off",
+    "@typescript-eslint/camelcase": "off",
+    "react/no-unescaped-entities": ["error", { "forbid": [">", "}", "\""] }]
+  },
+  "overrides": [
+    // Override some TypeScript rules just for .js files
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
+}

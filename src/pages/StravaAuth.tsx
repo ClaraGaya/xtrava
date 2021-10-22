@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StravaAuthService } from '../api/strava.auth.service';
+import { RouteComponentProps } from 'react-router-dom';
 
 
-const StravaAuth = () => {
+const StravaAuth:React.FC<RouteComponentProps> = (): JSX.Element => {
   const [err, setErr] = useState(false);
 
   const auth = async () => {
