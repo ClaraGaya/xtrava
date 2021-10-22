@@ -12,10 +12,15 @@ const StravaExchangeToken = () => {
     let authorization_code = urlParams.get('code');
 
     try {
-      await StravaAuthService.getToken(authorization_code).then(async (res) => {
+      await StravaAuthService.getToken(authorization_code).then(async(res) => {
         setAuth(true);
-        console.log(res)
-        history.push('/dashboard');
+        return res;
+      })
+      .then((data) => {
+        history.push({
+          pathname: '/dashboard',
+          state: data
+        });
       });
     } catch (err) {
       setAuth(false);
@@ -24,7 +29,7 @@ const StravaExchangeToken = () => {
 
   useEffect(() => {
     stravaExchangeToken();
-  });
+  }, []);
 
   return (
     <></>

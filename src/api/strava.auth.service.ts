@@ -14,4 +14,14 @@ export class StravaAuthService {
     .then(res => res.json())
     .catch((err: Response) => Promise.reject(err));
   }
+
+  static getUserData(userID:string, accessToken:string): Promise<Response> {
+    return fetch(`https://www.strava.com/api/v3/athletes/${userID}/stats`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      method: 'POST',
+      mode: 'cors'
+    })
+    .then(res => res.json())
+    .catch((err: Response) => Promise.reject(err));
+  };
 }
